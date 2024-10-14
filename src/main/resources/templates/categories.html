@@ -1,0 +1,20 @@
+<!-- src/main/resources/templates/categories.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+  <title>Категорії</title>
+</head>
+<body>
+<h1>Список категорій</h1>
+
+<!-- Виведення категорій -->
+<ul>
+  <li th:each="category : ${categories}">
+    <a th:href="@{/products/category/{id}(id=${category.id})}" th:text="${category.name}">Назва категорії</a>
+  </li>
+</ul>
+</body>
+</html>

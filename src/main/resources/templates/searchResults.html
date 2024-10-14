@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+  <title>Результати пошуку</title>
+</head>
+<body>
+<h1>Результати пошуку</h1>
+<form action="/products/search" method="get">
+  <input type="text" name="query" placeholder="Пошук продуктів" />
+  <button type="submit">Пошук</button>
+</form>
+
+<ul>
+  <th:block th:each="product : ${products}">
+    <li th:text="${product.name}"></li>
+  </th:block>
+</ul>
+
+<div th:if="${#lists.isEmpty(products)}">
+  <p>Нічого не знайдено.</p>
+</div>
+<a href="/products">Повернутись до всіх продуктів</a>
+</body>
+</html>

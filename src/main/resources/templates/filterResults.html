@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+  <title>Результати фільтрації</title>
+</head>
+<body>
+<h1>Результати фільтрації продуктів</h1>
+<div th:if="${products.size() == 0}">
+  <p>Немає продуктів, що відповідають критеріям фільтрації.</p>
+</div>
+<ul th:if="${products.size() > 0}">
+  <li th:each="product : ${products}">
+<!--    <img th:src="@{/images/{photo}(photo=${product.photo})}" alt="Фото продукту" style="width: 100px; height: 100px;"/>-->
+    <span th:text="${product.name}">Назва продукту</span> -
+    <span th:text="${product.price}">Ціна</span> грн
+    <span>(Категорія: <span th:text="${product.category.name}">Категорія</span>)</span>
+  </li>
+</ul>
+
+<a href="/products">Повернутись до всіх продуктів</a>
+</body>
+</html>

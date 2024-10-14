@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/products.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+  <title>Продукти</title>
+</head>
+<body>
+<h1>Список продуктів</h1>
+
+<!-- Пошук -->
+<form action="/products/search" method="get">
+  <input type="text" name="query" placeholder="Пошук продуктів" />
+  <button type="submit">Пошук</button>
+</form>
+
+
+<!-- Фільтрація -->
+<form th:action="@{/products/filter}" method="get">
+  <input type="number" name="minPrice" placeholder="Мінімальна ціна">
+  <input type="number" name="maxPrice" placeholder="Максимальна ціна">
+  <button type="submit">Фільтрувати</button>
+</form>
+
+
+<!-- Виведення продуктів -->
+<ul>
+  <li th:each="product : ${products}">
+    <span th:text="${product.name}">Назва продукту</span> -
+    <span th:text="${product.price}">Ціна</span> -
+    <span th:text="${product.category.name}">Категорія</span>
+  </li>
+</ul>
+
+<!-- Пагінація -->
+<div>
+  <span>Сторінка <span th:text="${currentPage + 1}">1</span> з <span th:text="${totalPages}">1</span></span>
+  <div>
+    <a th:if="${currentPage > 0}" th:href="@{/products(page=${currentPage - 1})}">Попередня</a>
+    <a th:if="${currentPage + 1 < totalPages}" th:href="@{/products(page=${currentPage + 1})}">Наступна</a>
+  </div>
+</div>
+</body>
+</html>
